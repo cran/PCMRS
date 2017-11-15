@@ -2,10 +2,10 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 scoreEPCM <- function(alpha, Y, X, Q, q, n, I, pall, pX, GHprobs, GHweights, GHnodes, scaled, cores) {
-    .Call('PCMRS_scoreEPCM', PACKAGE = 'PCMRS', alpha, Y, X, Q, q, n, I, pall, pX, GHprobs, GHweights, GHnodes, scaled, cores)
+    .Call('_PCMRS_scoreEPCM', PACKAGE = 'PCMRS', alpha, Y, X, Q, q, n, I, pall, pX, GHprobs, GHweights, GHnodes, scaled, cores)
 }
 
 loglikEPCM <- function(alpha, Y, X, Q, q, n, I, pall, pX, GHprobs, GHweights, GHnodes, scaled, cores) {
-    .Call('PCMRS_loglikEPCM', PACKAGE = 'PCMRS', alpha, Y, X, Q, q, n, I, pall, pX, GHprobs, GHweights, GHnodes, scaled, cores)
+    .Call('_PCMRS_loglikEPCM', PACKAGE = 'PCMRS', alpha, Y, X, Q, q, n, I, pall, pX, GHprobs, GHweights, GHnodes, scaled, cores)
 }
 

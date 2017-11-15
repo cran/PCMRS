@@ -17,7 +17,7 @@ PCMRS(Y, Q = 10, scaled = TRUE, method = c("L-BFGS-B", "nlminb"),
 \item{method}{Specifies optimization algorithm used by \code{\link{optim}}, either 
 \code{L-BFGS-B} or \code{nlminb}.}
 
-\item{cores}{Number of cores to be used in parallelized computation}
+\item{cores}{Number of cores to be used in parallelized computation.}
 }
 \value{
 \item{delta}{Matrix containing all item parameters for the PCMRS model, one row

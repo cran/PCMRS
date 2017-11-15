@@ -271,11 +271,7 @@ mat createD(vec mu){
            arma::vec GHnodes,
            int scaled,
            int cores) { 
-      
-      // initalize number of cores
-      if(cores==-99){
-        cores = omp_get_max_threads();
-      }
+    
       
       // initialize loglikelihood       
       double f = 0;   

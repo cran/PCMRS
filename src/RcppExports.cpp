@@ -8,7 +8,7 @@ using namespace Rcpp;
 
 // scoreEPCM
 arma::vec scoreEPCM(arma::vec alpha, arma::vec Y, arma::mat X, int Q, int q, int n, int I, int pall, int pX, arma::mat GHprobs, arma::mat GHweights, arma::vec GHnodes, int scaled, double cores);
-RcppExport SEXP PCMRS_scoreEPCM(SEXP alphaSEXP, SEXP YSEXP, SEXP XSEXP, SEXP QSEXP, SEXP qSEXP, SEXP nSEXP, SEXP ISEXP, SEXP pallSEXP, SEXP pXSEXP, SEXP GHprobsSEXP, SEXP GHweightsSEXP, SEXP GHnodesSEXP, SEXP scaledSEXP, SEXP coresSEXP) {
+RcppExport SEXP _PCMRS_scoreEPCM(SEXP alphaSEXP, SEXP YSEXP, SEXP XSEXP, SEXP QSEXP, SEXP qSEXP, SEXP nSEXP, SEXP ISEXP, SEXP pallSEXP, SEXP pXSEXP, SEXP GHprobsSEXP, SEXP GHweightsSEXP, SEXP GHnodesSEXP, SEXP scaledSEXP, SEXP coresSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -32,7 +32,7 @@ END_RCPP
 }
 // loglikEPCM
 double loglikEPCM(arma::vec alpha, arma::vec Y, arma::mat X, int Q, int q, int n, int I, int pall, int pX, arma::mat GHprobs, arma::mat GHweights, arma::vec GHnodes, int scaled, int cores);
-RcppExport SEXP PCMRS_loglikEPCM(SEXP alphaSEXP, SEXP YSEXP, SEXP XSEXP, SEXP QSEXP, SEXP qSEXP, SEXP nSEXP, SEXP ISEXP, SEXP pallSEXP, SEXP pXSEXP, SEXP GHprobsSEXP, SEXP GHweightsSEXP, SEXP GHnodesSEXP, SEXP scaledSEXP, SEXP coresSEXP) {
+RcppExport SEXP _PCMRS_loglikEPCM(SEXP alphaSEXP, SEXP YSEXP, SEXP XSEXP, SEXP QSEXP, SEXP qSEXP, SEXP nSEXP, SEXP ISEXP, SEXP pallSEXP, SEXP pXSEXP, SEXP GHprobsSEXP, SEXP GHweightsSEXP, SEXP GHnodesSEXP, SEXP scaledSEXP, SEXP coresSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -53,4 +53,15 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(loglikEPCM(alpha, Y, X, Q, q, n, I, pall, pX, GHprobs, GHweights, GHnodes, scaled, cores));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_PCMRS_scoreEPCM", (DL_FUNC) &_PCMRS_scoreEPCM, 14},
+    {"_PCMRS_loglikEPCM", (DL_FUNC) &_PCMRS_loglikEPCM, 14},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_PCMRS(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }

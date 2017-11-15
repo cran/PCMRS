@@ -25,7 +25,7 @@ createResponse <- function(Y){
 #' @param scaled Should the scaled version of the response style parameterization be used? Default is \code{TRUE}.
 #' @param method Specifies optimization algorithm used by \code{\link{optim}}, either 
 #' \code{L-BFGS-B} or \code{nlminb}.
-#' @param cores Number of cores to be used in parallelized computation
+#' @param cores Number of cores to be used in parallelized computation.
 #' @return 
 #' \item{delta}{Matrix containing all item parameters for the PCMRS model, one row
 #' per item, one column per category.} 
