@@ -7,9 +7,11 @@
 #include <vector>
 #include <algorithm>
 #include <assert.h>
-#include <omp.h>
 #include <iostream>
 
+#ifdef _OPENMP
+#include <omp.h>
+#endif
 
 using namespace Rcpp;
 using namespace arma;
@@ -138,11 +140,15 @@ mat createD(vec mu){
         etaBoth = join_rows(etaTheta,etaGamma);
       }
 
-  // initialize number of different threads
-  omp_set_num_threads(cores);
-
-#pragma omp parallel for
+      // initialize number of different threads
+      #ifdef _OPENMP
+      if(cores > 1)
+            omp_set_num_threads(cores);
+      #endif
+      
+  
     // loop through persons
+    #pragma omp parallel for
     for(int i=0; i<n ;i++){ 
 
       // initialize a running vector over all Q*Q knots
@@ -307,21 +313,25 @@ mat createD(vec mu){
       mat sigma12 = trans(chol(sigma));
 
       
-mat etaBoth = zeros(n,2);
-if(pX>0){
-      vec betaTheta = alpha(span(pall-2*pX,pall-pX-1));
-      vec betaGamma = alpha(span(pall-pX,pall-1));
-      vec etaTheta = X * betaTheta;
-      vec etaGamma = X * betaGamma;
-      etaBoth = join_rows(etaTheta,etaGamma);
-}
-  // initialize number of different threads
-  omp_set_num_threads(cores);
+      mat etaBoth = zeros(n,2);
+      if(pX>0){
+            vec betaTheta = alpha(span(pall-2*pX,pall-pX-1));
+            vec betaGamma = alpha(span(pall-pX,pall-1));
+            vec etaTheta = X * betaTheta;
+            vec etaGamma = X * betaGamma;
+            etaBoth = join_rows(etaTheta,etaGamma);
+      }
+      
+      // initialize number of different threads
+      #ifdef _OPENMP
+        if(cores > 1)
+          omp_set_num_threads(cores);
+      #endif
 
       // loop through all persons
-       #pragma omp parallel for reduction(-:f)
+      #pragma omp parallel for reduction(-:f)
       for(int i=0; i<n ;i++){
-int pos = i*q*I;
+      int pos = i*q*I;
         // get response of person i
         vec yi = Y(span(pos,pos+q*I-1));
  
