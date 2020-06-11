@@ -36,11 +36,11 @@ createResponse <- function(Y){
 #' \item{sigma.PCM}{Estimate for variance of ability parameters theta in the simple PCM model.}
 #' \item{Y}{Data frame containing the ordinal item response data, one row per obeservation, one column per item.} 
 #' \item{scaled}{Logical, \code{TRUE} if scaled version of the response style parameterization is used.} 
-#' @author Gunther Schauberger\cr \email{gunther@@stat.uni-muenchen.de}\cr
-#' \url{https://tinyurl.com/gunther-lmu}
+#' @author Gunther Schauberger\cr \email{gunther.schauberger@@tum.de}\cr
+#' \url{https://www.sg.tum.de/epidemiologie/team/schauberger/}
 #' @seealso \code{\link{person.posterior}} \code{\link{PCMRS-package}}
-#' @references Tutz, Gerhard, Schauberger, Gunther and Berger, Moritz (2017): 
-#' Response Styles in the Partial Credit Model, \emph{Applied Psychological Measurement}, to appear
+#' @references Tutz, Gerhard, Schauberger, Gunther and Berger, Moritz (2018): 
+#' Response Styles in the Partial Credit Model, \emph{Applied Psychological Measurement}, \url{https://journals.sagepub.com/doi/10.1177/0146621617748322}
 #' @keywords PCMRS
 #' @examples
 #' \dontshow{
@@ -59,7 +59,7 @@ createResponse <- function(Y){
 #' 
 #' data(tenseness)
 #' 
-#' set.seed(1860)
+#' set.seed(5)
 #' samples <- sample(1:nrow(tenseness), 100)
 #' tense_small <- tenseness[samples,1:4]
 #' 
@@ -69,7 +69,7 @@ createResponse <- function(Y){
 #' plot(m_small)
 #' 
 #' persons <- person.posterior(m_small, cores = 2)
-#' plot(jitter(persons,100))
+#' plot(jitter(persons, 100))
 #' 
 #' ################################################
 #' ## Example from Tutz et al. 2017:
@@ -143,7 +143,6 @@ PCMRS <- function(Y, Q = 10, scaled = TRUE, method = c("L-BFGS-B", "nlminb"), co
 
 ## change scaling for variance and correlation parameters
  par.scale <- rep(1,length(alpha.start))
-
 
 ########################
 if(method == "L-BFGS-B"){

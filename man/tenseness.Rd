@@ -4,7 +4,8 @@
 \name{tenseness}
 \alias{tenseness}
 \title{Tenseness data from the Freiburg Complaint Checklist (tenseness)}
-\format{A data frame containing data from the Freiburg Complaint Checklist with 2042 observations. 
+\format{
+A data frame containing data from the Freiburg Complaint Checklist with 2042 observations. 
 All items refer to the scale \emph{Tenseness} and are measured on a 5-point Likert scale where low numbers 
 correspond to low frequencies or low intensitites of the respective complaint and vice versa. 
 \describe{ 
@@ -16,7 +17,8 @@ correspond to low frequencies or low intensitites of the respective complaint an
 \item{Restless feet}{Do you notice that your feet are restless?}
 \item{Twitching eyes}{Do you notice unvoluntary twitching of your eyes?}
 \item{Twitching mouth}{Do you notice unvoluntary twitching of your mouth?}
- }}
+ }
+}
 \source{
 ZPID (2013). PsychData of the Leibniz Institute for Psychology Information ZPID. Trier: Center for Research Data in Psychology.
 
@@ -44,8 +46,7 @@ plot(jitter(persons,100))
 }
 }
 \references{
-Tutz, Gerhard, Schauberger, Gunther and Berger, Moritz (2016): 
-Response Styles in the Partial Credit Model, \emph{Department of Statistics, LMU
-Munich}, Technical Report 196
+Tutz, Gerhard, Schauberger, Gunther and Berger, Moritz (2018): 
+Response Styles in the Partial Credit Model, \emph{Applied Psychological Measurement}, \url{https://journals.sagepub.com/doi/10.1177/0146621617748322}
 }
 \keyword{datasets}

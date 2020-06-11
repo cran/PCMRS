@@ -4,7 +4,8 @@
 \name{emotion}
 \alias{emotion}
 \title{Emotional reactivity data from the Freiburg Complaint Checklist (emotion)}
-\format{A data frame containing data from the Freiburg Complaint Checklist with 2032 observations. 
+\format{
+A data frame containing data from the Freiburg Complaint Checklist with 2032 observations. 
 All items refer to the scale \emph{Emotional reactivity} and are measured on a 5-point Likert scale where low numbers 
 correspond to low frequencies or low intensitites of the respective complaint and vice versa. 
 \describe{ 
@@ -16,7 +17,8 @@ correspond to low frequencies or low intensitites of the respective complaint an
 \item{Rapid heartbeat in excitement}{Do you feel a rapid heartbeat in excitement?}
 \item{Urge to defecate in excitement}{Do you feel the urge to defecate in excitement?}
 \item{Trembling knees}{Do you start trembling in excitement or do you get trembling knees?}
- }}
+ }
+}
 \source{
 ZPID (2013). PsychData of the Leibniz Institute for Psychology Information ZPID. Trier: Center for Research Data in Psychology.
 
@@ -37,8 +39,7 @@ plot(m.emotion)
 }
 }
 \references{
-Tutz, Gerhard, Schauberger, Gunther and Berger, Moritz (2016): 
-Response Styles in the Partial Credit Model, \emph{Department of Statistics, LMU
-Munich}, Technical Report 196
+Tutz, Gerhard, Schauberger, Gunther and Berger, Moritz (2018): 
+Response Styles in the Partial Credit Model, \emph{Applied Psychological Measurement}, \url{https://journals.sagepub.com/doi/10.1177/0146621617748322}
 }
 \keyword{datasets}

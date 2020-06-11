@@ -70,11 +70,11 @@ est_i <- est_i$integral/adaptIntegrate(factor_i,lowerLimit=-limits, upperLimit =
 #' @param which Optional vector to specify that only for a subset of all persons the posterior estimate is calculated.
 #' @return 
 #' \item{}{Matrix containing all estimates of person parameters, both theta and gamma.} 
-#' @author Gunther Schauberger\cr \email{gunther@@stat.uni-muenchen.de}\cr
-#' \url{https://tinyurl.com/gunther-lmu}
+#' @author Gunther Schauberger\cr \email{gunther.schauberger@@tum.de}\cr
+#' \url{https://www.sg.tum.de/epidemiologie/team/schauberger/}
 #' @seealso \code{\link{PCMRS}} \code{\link{PCMRS-package}}
-#' @references Tutz, Gerhard, Schauberger, Gunther and Berger, Moritz (2017): 
-#' Response Styles in the Partial Credit Model, \emph{Applied Psychological Measurement}, to appear
+#' @references Tutz, Gerhard, Schauberger, Gunther and Berger, Moritz (2018): 
+#' Response Styles in the Partial Credit Model, \emph{Applied Psychological Measurement}, \url{https://journals.sagepub.com/doi/10.1177/0146621617748322}
 #' @keywords PCMRS
 #' @examples
 #' \dontshow{
@@ -94,7 +94,7 @@ est_i <- est_i$integral/adaptIntegrate(factor_i,lowerLimit=-limits, upperLimit =
 #' 
 #' data(tenseness)
 #' 
-#' set.seed(1860)
+#' set.seed(5)
 #' samples <- sample(1:nrow(tenseness), 100)
 #' tense_small <- tenseness[samples,1:4]
 #' 
@@ -104,7 +104,7 @@ est_i <- est_i$integral/adaptIntegrate(factor_i,lowerLimit=-limits, upperLimit =
 #' plot(m_small)
 #' 
 #' persons <- person.posterior(m_small, cores = 2)
-#' plot(jitter(persons,100))
+#' plot(jitter(persons, 100))
 #' 
 #' ################################################
 #' ## Example from Tutz et al. 2017:
@@ -154,8 +154,9 @@ person.posterior <- function(model, cores = 30, tol = 1e-4, maxEval = 600, which
   new_order <- y_pat_fac[!duplicated(y_patterns)]
   estimates <- estimates[,order(new_order),drop = FALSE]
   estimates <- estimates[,y_pat_fac,drop = FALSE]
-  
+
   rownames(estimates) <- c("theta", "gamma")
+  colnames(estimates) <- rownames(model$Y)[which]
   
   t(estimates)
 }

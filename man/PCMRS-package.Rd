@@ -24,7 +24,7 @@ mini.ex
 
 data(tenseness)
 
-set.seed(1860)
+set.seed(5)
 samples <- sample(1:nrow(tenseness), 100)
 tense_small <- tenseness[samples,1:4]
 
@@ -33,7 +33,7 @@ m_small
 plot(m_small)
 
 persons <- person.posterior(m_small, cores = 2)
-plot(jitter(persons,100))
+plot(jitter(persons, 100))
 
 ################################################
 ## Example from Tutz et al. 2017:
@@ -47,15 +47,15 @@ plot(m.emotion)
 }
 }
 \references{
-Tutz, Gerhard, Schauberger, Gunther and Berger, Moritz (2017): 
-Response Styles in the Partial Credit Model, \emph{Applied Psychological Measurement}, to appear
+Tutz, Gerhard, Schauberger, Gunther and Berger, Moritz (2018): 
+Response Styles in the Partial Credit Model, \emph{Applied Psychological Measurement}, \url{https://journals.sagepub.com/doi/10.1177/0146621617748322}
 }
 \seealso{
 \code{\link{PCMRS}}, \code{\link{person.posterior}}, \code{\link{tenseness}}, \code{\link{emotion}}
 }
 \author{
-Gunther Schauberger\cr \email{gunther@stat.uni-muenchen.de}\cr
-\url{https://tinyurl.com/gunther-lmu}
+Gunther Schauberger\cr \email{gunther.schauberger@tum.de}\cr
+\url{https://www.sg.tum.de/epidemiologie/team/schauberger/}
 }
 \keyword{Credit}
 \keyword{PCMRS}

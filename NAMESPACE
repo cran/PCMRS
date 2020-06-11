@@ -14,4 +14,3 @@ export(PCMRS, person.posterior)
 
 S3method(print, PCMRS)
 S3method(plot, PCMRS)
-exportClasses("PCMRS")
