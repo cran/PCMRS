@@ -78,14 +78,13 @@ est_i <- est_i$integral/adaptIntegrate(factor_i,lowerLimit=-limits, upperLimit =
 #' @keywords PCMRS
 #' @examples
 #' \dontshow{
-#' k <- 4; n <- 40; I <- 4
+#' k <- 4; n <- 50; I <- 4
 #' set.seed(1860)
 #' Y <- as.data.frame(matrix(sample(1:k, I*n, TRUE),nrow = n))
 #' Y <- data.frame(lapply(Y, as.ordered))
 #' 
 #' mini.ex <- PCMRS(Y, cores = 2)
-#' 
-#' persons <- person.posterior(mini.ex, cores = 1, which = 1)
+#' mini.ex
 #' }
 #' \dontrun{
 #' ################################################

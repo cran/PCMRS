@@ -41,6 +41,7 @@ vec responseFun(vec eta){
   for(int k=1; k<q ;k++){
     pi_vec(k) =pi_vec(k-1)*exp(eta(k-1));
   }
+  pi_vec = (pi_vec-0.5)*0.9999999+0.5;
   return pi_vec;
 }
 
@@ -85,11 +86,16 @@ mat createD(vec mu){
            arma::mat GHweights,
            arma::vec GHnodes,
            int scaled,
-           double cores) { 
+           double cores,
+           double lambda) { 
              
       // initialize score vector
       vec s = zeros(pall);
-
+  
+    
+      // current L2 penalty
+      vec P2 = 2*alpha*lambda;
+    
       // initialize cij matrix for all persons and all knots, 
       // will be needed for normalization per person afterwards
       // in contrast, for implementation of PCM this was calculated BEFORE looping through persons
@@ -257,7 +263,7 @@ mat createD(vec mu){
       }
 
       // sum score contributions over all persons per covariate
-      s = -sum(help_mat,1);
+      s = -sum(help_mat,1) + P2;
 
       return s;
            }
@@ -276,12 +282,17 @@ mat createD(vec mu){
            arma::mat GHweights,
            arma::vec GHnodes,
            int scaled,
-           int cores) { 
+           int cores,
+           double lambda) { 
     
       
       // initialize loglikelihood       
       double f = 0;   
 
+    // current value of L2 penalty
+    double P2 = accu(alpha%alpha)*lambda;
+    
+    
       // initialize design for one person, without random effects
       mat Z = -join_rows(diagmat(ones(q*I)),zeros(q*I,3+2*pX));
       mat etai = Z*alpha;
@@ -368,5 +379,5 @@ mat createD(vec mu){
          // accumulate all likelihood contributions, weights by respective weights and probs of knots
       }
 
-  return f;
+  return (f+P2);
 }

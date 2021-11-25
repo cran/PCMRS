@@ -4,7 +4,14 @@
 \alias{PCMRS}
 \title{Model Response Styles in Partial Credit Models}
 \usage{
-PCMRS(Y, Q = 10, scaled = TRUE, method = c("L-BFGS-B", "nlminb"), cores = 30)
+PCMRS(
+  Y,
+  Q = 10,
+  scaled = TRUE,
+  method = c("L-BFGS-B", "nlminb"),
+  cores = 30,
+  lambda = 0
+)
 }
 \arguments{
 \item{Y}{Data frame containing the ordinal item response data (as ordered factors), one row per obeservation, one column per item.}
@@ -17,6 +24,8 @@ PCMRS(Y, Q = 10, scaled = TRUE, method = c("L-BFGS-B", "nlminb"), cores = 30)
 \code{L-BFGS-B} or \code{nlminb}.}
 
 \item{cores}{Number of cores to be used in parallelized computation.}
+
+\item{lambda}{Tuning parameter for optional L2 penalty on coefficient vector (for stabilized estimation)}
 }
 \value{
 \item{delta}{Matrix containing all item parameters for the PCMRS model, one row
@@ -27,7 +36,8 @@ response style parameters gamma.}
 per item, one column per category.} 
 \item{sigma.PCM}{Estimate for variance of ability parameters theta in the simple PCM model.}
 \item{Y}{Data frame containing the ordinal item response data, one row per obeservation, one column per item.} 
-\item{scaled}{Logical, \code{TRUE} if scaled version of the response style parameterization is used.}
+\item{scaled}{Logical, \code{TRUE} if scaled version of the response style parameterization is used.} 
+\item{neg.loglik}{Negative marginal log-likelihood}
 }
 \description{
 Performs PCMRS, a method to model response styles in Partial Credit Models

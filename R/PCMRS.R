@@ -26,6 +26,7 @@ createResponse <- function(Y){
 #' @param method Specifies optimization algorithm used by \code{\link{optim}}, either 
 #' \code{L-BFGS-B} or \code{nlminb}.
 #' @param cores Number of cores to be used in parallelized computation.
+#' @param lambda Tuning parameter for optional L2 penalty on coefficient vector (for stabilized estimation)
 #' @return 
 #' \item{delta}{Matrix containing all item parameters for the PCMRS model, one row
 #' per item, one column per category.} 
@@ -36,6 +37,7 @@ createResponse <- function(Y){
 #' \item{sigma.PCM}{Estimate for variance of ability parameters theta in the simple PCM model.}
 #' \item{Y}{Data frame containing the ordinal item response data, one row per obeservation, one column per item.} 
 #' \item{scaled}{Logical, \code{TRUE} if scaled version of the response style parameterization is used.} 
+#' \item{neg.loglik}{Negative marginal log-likelihood}
 #' @author Gunther Schauberger\cr \email{gunther.schauberger@@tum.de}\cr
 #' \url{https://www.sg.tum.de/epidemiologie/team/schauberger/}
 #' @seealso \code{\link{person.posterior}} \code{\link{PCMRS-package}}
@@ -81,8 +83,9 @@ createResponse <- function(Y){
 #' 
 #' plot(m.emotion)
 #' }
-PCMRS <- function(Y, Q = 10, scaled = TRUE, method = c("L-BFGS-B", "nlminb"), cores = 30){
-
+PCMRS <- function(Y, Q = 10, scaled = TRUE, method = c("L-BFGS-B", "nlminb"), cores = 30,
+                  lambda = 0){
+# browser()
   ## For cran version X is eliminated from command and set NULL automatically!
   X <- NULL
   
@@ -150,7 +153,7 @@ if(method == "L-BFGS-B"){
                   Q = Q, q = q, I = I, n = n, Y = response, X = X, pall = length(alpha.start),
                   pX = pX, GHprobs = node.probs, GHweights = weights, GHnodes = nodes,
                   scaled = as.numeric(scaled),
-                  cores = cores, lower = l.bound, upper = u.bound, method="L-BFGS-B",
+                  cores = cores, lambda = lambda, lower = l.bound, upper = u.bound, method="L-BFGS-B",
                   control = list(parscale = par.scale)))
 
   if( (class(m.opt) == "try-error")){
@@ -160,7 +163,7 @@ if(method == "L-BFGS-B"){
                        Q = Q, q = q, I = I, n = n, Y = response, X = X, pall = length(alpha.start),
                        pX = pX, GHprobs = node.probs, GHweights = weights, GHnodes = nodes, 
                        scaled = as.numeric(scaled),
-                       cores = cores, lower = l.bound, upper = u.bound, method="L-BFGS-B",
+                       cores = cores, lambda = lambda, lower = l.bound, upper = u.bound, method="L-BFGS-B",
                        control = list(parscale = par.scale)))
  }
  
@@ -175,7 +178,7 @@ if(method == "nlminb"){
                   Q = Q, q = q, I = I, n = n, Y = response, X = X, pall = length(alpha.start),
                   pX = pX, GHprobs = node.probs, GHweights = weights, GHnodes = nodes, 
                   scaled = as.numeric(scaled),
-                  cores = cores, lower = l.bound, upper = u.bound, scale= par.scale))
+                  cores = cores, lambda = lambda, lower = l.bound, upper = u.bound, scale= par.scale))
   
   if( (class(m.opt) == "try-error")){
     par.scale <- rep(0.1,length(alpha.start))
@@ -184,7 +187,7 @@ if(method == "nlminb"){
                     Q = Q, q = q, I = I, n = n, Y = response, X = X, pall = length(alpha.start),
                     pX = pX, GHprobs = node.probs, GHweights = weights, GHnodes = nodes, 
                     scaled = as.numeric(scaled),
-                    cores = cores, lower = l.bound, upper = u.bound, scale= par.scale))
+                    cores = cores, lambda = lambda, lower = l.bound, upper = u.bound, scale= par.scale))
 
   }
   if( (class(m.opt) == "try-error")){
@@ -194,7 +197,7 @@ if(method == "nlminb"){
                         Q = Q, q = q, I = I, n = n, Y = response, X = X, pall = length(alpha.start),
                         pX = pX, GHprobs = node.probs, GHweights = weights, GHnodes = nodes, 
                         scaled = as.numeric(scaled),
-                        cores = cores, lower = l.bound, upper = u.bound, scale= par.scale))
+                        cores = cores, lambda = lambda, lower = l.bound, upper = u.bound, scale= par.scale))
     
   }
 }
@@ -220,6 +223,18 @@ if( (class(m.opt) != "try-error")){
 #                   cores = 1)
 # 
 #   print( rbind(c(a0),c(n0)))
+  ###test 24.03.2021
+  
+  nloglik <- loglikEPCM(coefs,Q = Q, q = q, I = I, n = n, Y = response, X = X, pall = length(alpha.start),
+               pX = pX, GHprobs = node.probs, GHweights = weights, GHnodes = nodes,
+               scaled = as.numeric(scaled), cores = cores, lambda = 0)
+
+  
+  
+  
+  ###########
+  
+  
   
   delta <- matrix(coefs[1:(length(coefs)-3-2*pX)], byrow=TRUE, ncol = q)
   colnames(delta) <- paste("Catgr",1:q,sep=".")
@@ -251,7 +266,7 @@ colnames(Sigma) <- rownames(Sigma) <- c("theta","gamma")
 
   ret.list <- list(delta = delta, Sigma = Sigma, beta.theta = beta.theta, 
                    beta.gamma = beta.gamma, delta.PCM = delta.PCM, sigma.PCM = sigma.PCM,
-                   Y = Y, scaled = scaled)
+                   Y = Y, scaled = scaled, neg.loglik = nloglik)
 
   class(ret.list) <- "PCMRS"
   
