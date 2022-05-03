@@ -156,7 +156,7 @@ if(method == "L-BFGS-B"){
                   cores = cores, lambda = lambda, lower = l.bound, upper = u.bound, method="L-BFGS-B",
                   control = list(parscale = par.scale)))
 
-  if( (class(m.opt) == "try-error")){
+  if( inherits(m.opt, "try-error")){
     par.scale <- rep(0.1,length(alpha.start))
     
     m.opt <- try(optim(par = alpha.start, fn = loglikEPCM, gr = scoreEPCM, 
@@ -167,7 +167,7 @@ if(method == "L-BFGS-B"){
                        control = list(parscale = par.scale)))
  }
  
- if( (class(m.opt) == "try-error")){
+  if( inherits(m.opt, "try-error")){
    par.scale <- rep(1,length(alpha.start))
    method <- "nlminb"
  }
@@ -180,7 +180,7 @@ if(method == "nlminb"){
                   scaled = as.numeric(scaled),
                   cores = cores, lambda = lambda, lower = l.bound, upper = u.bound, scale= par.scale))
   
-  if( (class(m.opt) == "try-error")){
+  if( inherits(m.opt, "try-error")){
     par.scale <- rep(0.1,length(alpha.start))
     
     m.opt <- try(nlminb(start = alpha.start, objective = loglikEPCM, gradient = scoreEPCM, 
@@ -190,7 +190,7 @@ if(method == "nlminb"){
                     cores = cores, lambda = lambda, lower = l.bound, upper = u.bound, scale= par.scale))
 
   }
-  if( (class(m.opt) == "try-error")){
+  if( inherits(m.opt, "try-error")){
     par.scale <- rep(0.01,length(alpha.start))
     
     m.opt <- try(nlminb(start = alpha.start, objective = loglikEPCM, gradient = scoreEPCM, 
@@ -206,7 +206,7 @@ if(method == "nlminb"){
   
 delta <- Sigma <- NA
 
-if( (class(m.opt) != "try-error")){
+ if( !inherits(m.opt, "try-error")){
   ## extract results and prepare return
   coefs <- m.opt$par
 # browser()

@@ -68,8 +68,7 @@ est_i <- est_i$integral/adaptIntegrate(factor_i,lowerLimit=-limits, upperLimit =
 #' @param maxEval The maximum number of function evaluations needed in numerical integration.
 #' If specified as 0 implies no limit. For more details see \code{\link{adaptIntegrate}}.
 #' @param which Optional vector to specify that only for a subset of all persons the posterior estimate is calculated.
-#' @return 
-#' \item{}{Matrix containing all estimates of person parameters, both theta and gamma.} 
+#' @return Matrix containing all estimates of person parameters, both theta and gamma.
 #' @author Gunther Schauberger\cr \email{gunther.schauberger@@tum.de}\cr
 #' \url{https://www.sg.tum.de/epidemiologie/team/schauberger/}
 #' @seealso \code{\link{PCMRS}} \code{\link{PCMRS-package}}

@@ -1,10 +1,10 @@
-1f612290949456d8a5e23e0101d3a871 *DESCRIPTION
+20fcd99bdde65810a1b3a69b0c714222 *DESCRIPTION
 4c668d3d7634b0188af18a57c1173ead *NAMESPACE
 b3e1f2d78dc903598e8fccf925ee53b6 *R/PCMRS-package.R
-e152e30aec79c803868ed23b7ee89212 *R/PCMRS.R
+e88189b07d95581b1f2c996aea54489e *R/PCMRS.R
 73ab67fc475f972ab5d341b977dc648f *R/RcppExports.R
 25f2c4a1e8fd1cdc348f07cc5ffbb2ea *R/functions.R
-8026b8418c2eec2c6bf9b73c1a5d9eef *R/person.posterior.R
+2f9655f21ed3bf8a892c0f353a2ec719 *R/person.posterior.R
 448e95fe95a46c3dc1260c7686504de7 *R/plot.PCMRS.R
 c1c6f8fad362d96461b39f84be90cf9d *R/print.PCMRS.R
 08c932ef1a15172785cc68525f0dad39 *data/emotion.RData
@@ -12,7 +12,7 @@ e6bf07a3f89d5cf046bf809b13fd96a8 *data/tenseness.RData
 a090907493a5cb89f6d465bf4758881f *man/PCMRS-package.Rd
 e541a6147d952f9a4b8d51df38cef4cd *man/PCMRS.Rd
 50d2e4b3c35613767602673cc292bbac *man/emotion.Rd
-2040d19aa3d9251d1b9d354f2f39b8da *man/person.posterior.Rd
+c64fb4e41dda1efff7f75016245c2ca8 *man/person.posterior.Rd
 9147134627174b0df2463558527dda77 *man/tenseness.Rd
 49c5d4d01f75330f7e9f41595e7f5d06 *src/Makevars
 f6e5726bd79222f8b725505026d5e226 *src/Makevars.win

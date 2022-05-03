@@ -20,7 +20,7 @@ If specified as 0 implies no limit. For more details see \code{\link{adaptIntegr
 \item{which}{Optional vector to specify that only for a subset of all persons the posterior estimate is calculated.}
 }
 \value{
-\item{}{Matrix containing all estimates of person parameters, both theta and gamma.}
+Matrix containing all estimates of person parameters, both theta and gamma.
 }
 \description{
 Calculates posterior estimates for both person parameters, namely the ability parameters theta and the 
